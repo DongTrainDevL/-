@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block main %}
+
+
+{% include 'nav.html' %}
+
+<div class="overflow-x-auto relative shadow-md sm:rounded-lg  px-5 ">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 ">
+            <tr>
+                <th scope="col" class="py-3 px-6">
+                    ชื่อผู้ใช้
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    ชื่อ
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    นามสกุล
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    อีเมล
+                </th>
+                <th>
+                    สถาณะ
+                </th>
+                <th>
+                    แก้ไข
+                </th>
+                <th>
+                    ลบ
+                </th>
+            </tr>
+        </thead>
+        <br>
+        <tbody>
+            <a href="{% url 'listmember' %}">Back</a>
+            {% for x in listmember %}
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 w-full">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{x.username}}
+                </th>
+                <td class="py-4 px-6">
+                    {{x.first_name}}
+                </td>
+                <td class="py-4 px-6">
+                    {{x.last_name}}
+                </td>
+                <td class="py-4 px-6">
+                    {{x.email}}
+                </td>
+                <td class="py-4 px-6">
+                    ยังไม่ทำ
+                </td>
+                <td class="#">
+                    <a href="{% url 'update' x.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Views</a>
+                    
+                    
+                </td>
+                <td class="#">
+                    <a href="{% url 'delete' x.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">ลบ</a>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}

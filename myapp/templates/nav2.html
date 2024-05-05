@@ -1,0 +1,49 @@
+
+{% load static %}
+<nav class="bg-gray-100 py-1 m-10 h-20 border-yellow-200 px-1 dark:bg-gray-900 ">
+    <div class="container flex flex-wrap items-center justify-between mx-auto">
+      
+      <div class="  w-full " id="navbar-default">
+        <ul class="flex flex-col p-2 mt-3  border-gray-100 rounded-lg  md:flex-row md:space-x-4  md:mt-0 md:text-sm md:font-medium md:border-0  dark:bg-indigo-50  ">
+
+            <li>
+                <a  href="/your_order" class=" px-2 hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Your Order</a>
+            </li>
+
+            <li>
+               
+            </li>
+          
+            <li>
+              
+            <a class="#" href="{% url 'cart_list' %}"> 
+              <img class="icon-cart flex-initial rounded-full mx-8  " src="{% static 'img/icon_cart.png' %}" alt="user photo">
+                  <span id="cart-count">
+              {% if request.user.is_authenticated %}
+              {{ cart_items_count }}
+              {% else %} <p class="icon-number-cart">0</p>{% endif %}</span>
+              <style>
+                .icon-cart {
+                  height: 30px;
+                  width: 30px;
+                  
+
+    
+                }
+                .icon-number-cart {
+                  margin-bottom: 20%;
+                  
+                }
+              </style>
+            </a>
+            
+          
+          </li>
+          
+          
+        
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

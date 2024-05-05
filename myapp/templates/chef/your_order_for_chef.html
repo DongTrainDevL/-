@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>your order</title>
+{% endblock %}
+
+
+{% block main %}
+
+<div class="bg-gray-500 m-9 px-3 py-2 w-auto h-10  ">
+    <h1 class="text-white text-md:xl ">Your Order</h1>
+</div>
+
+
+
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg m-9">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Product name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    id
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Quantity
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    user
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if latest_order %}
+            <p><strong>Order ID:</strong> {{ latest_order.id }}</p>
+            <p><strong>Date Ordered:</strong> {{ latest_order.date_ordered }}</p>
+            <h2>Order Items</h2>
+            <ul class="px-6 py-4">
+                <a href="from_order_detail_chef" class="bg-red-500 text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105">check order</a>
+            </ul>
+            
+            {% for item in latest_order.orderitem_set.all  %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ item.food.title }}
+                </th>
+                <td class="px-6 py-4">
+                     {{ item.food_id }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ item.date_added }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ item.quantity }}
+                </td>
+
+                <td class="px-6 py-4">
+                    {{ item.user }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ item.date_oreded }}
+                </td>
+                
+            </tr>
+            {% endfor %}
+            
+            {% else %}
+            <p>No orders found for the current user.</p>
+            {% endif %}
+
+            
+        </tbody>
+    </table>
+
+
+
+
+
+
+  
+{% endblock %}

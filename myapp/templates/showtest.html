@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+<!-- This is an example component -->
+
+<h1>show test image</h1>
+{% for k in test %}
+<div class="w-full p-8 mx-2 flex justify-center">
+    <img id="showImage" class="max-w-xs w-32 items-center border" src="{{ k.image.url }}" >
+    <p>{{ k.username }}</p>                     
+    </div>
+{% endfor %}
+{% endblock %}

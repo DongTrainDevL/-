@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Payment</title>
+{% endblock %}
+
+
+
+{% block main %}
+
+
+<h1>Payment</h1>
+
+<div class="ml-[40%] mt-2">
+    <img class="pay" src="{% static 'img/payment/pay1.png' %}" alt="user photo">
+</div>
+
+<form method="post">
+  {% csrf_token %}
+  
+  <div class="relative overflow-x-auto mt-4">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-400 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 rounded-l-lg">
+                    image
+                </th>
+                <th scope="col" class="px-6 py-3 rounded-l-lg">
+                    Product name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Qty
+                </th>
+                <th scope="col" class="px-6 py-3 rounded-r-lg">
+                    Price
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cart_item in cart_items %}
+            <tr class="bg-white dark:bg-gray-800"> 
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <img class="h-24" src="{{ cart_item.food.image.url }}" alt="image">
+                </th> 
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ cart_item.food.name }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ cart_item.quantity }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ cart_item.food.price }}
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+        
+    </table>
+</div>
+
+<tfoot>
+    <span class="text-center w-1/5 font-semibold text-sm ml-3">totol price : {{ total_price }}</span><hr>
+</tfoot>
+<a class="bg-red-500 text-white  font-semibold text-sm px-2 py-4 h-13 w-1/6 focus:outline-none poppins rounded-full mt-5 transform transition duration-300 hover:scale-105" href="{% url 'confirm_order' %}">Pay</a>
+</form>
+
+{% endblock %}
+
+
+

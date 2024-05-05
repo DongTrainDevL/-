@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block main %}
+
+
+{% include 'nav.html' %}
+<header>
+    <div class="block p-6 rounded-lg shadow-lg bg-gray-100 max-w-sm mx-auto mt-[7%]">
+      <p class="text-2xl font-semibold mb-5">แก้ไขข้อมูลสมาชิก</p>
+    
+    <div class="w-full bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"></div>
+    <form action="/updaterecord/{{ User.id }}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+    <div class="mb-6 w-[100%] mx-auto ">
+      <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">ชื่อ</label>
+      <input name="first_name" value="{{User.first_name}}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    
+    <div class="mb-6 w-[100%] mx-auto ">
+      <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">นามสกุล</label>
+      <input id="default-input" value="{{User.last_name}}" rows="4" name="last_name" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=""></input>
+    </div>
+    
+        <button href="#" type="submit" class="w-[50%] ml-[28%] py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700 ">เพิ่ม</button>
+          </form>
+        </div>
+    </header>
+
+{% endblock %}

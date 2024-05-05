@@ -1,0 +1,67 @@
+<!-- Your template -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Order Detail</title>
+{% endblock %}
+
+{% block main %}
+<div class="bg-gray-500 m-9 px-3 py-2 w-auto h-10  ">
+    <h1 class="text-white text-md:xl ">Your Order</h1>
+</div>
+
+<a href="{% url 'from_order_detail_for_check_status_order' %}">check order agin chef</a>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg m-9">
+    <table class="w-full m-9 px-3 py-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-4 py-2">
+                    Date
+                </th>
+                <th scope="col" class="px-5 py-4">
+                    User
+                </th>
+                <th scope="col" class="px-3 py-4">
+                    Action
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <p><strong>Order ID:</strong> {{ latest_order.id }}</p>
+            <p><strong>Date Ordered:</strong> {{ latest_order.date_ordered }}</p>
+            <h2>Order Items</h2>
+            
+            {% for item in order_items %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4">
+                    {{ item.date_added }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ item.user }}
+                </td>
+                <td class="px-6 py-4"> 
+                    <div class="px-3 py-4 ">
+                        <form action="{% url 'update_order_status' item.order.id %}" method="post">
+                            {% csrf_token %}
+                            <select name="status">
+                                <option value="cooking">Cooking</option>
+                                <option value="success">Success</option>
+                                <option value="finished">Finished</option>
+                                <option value="out">Out (Cancel)</option>
+                            </select>
+                            <button class="bg-blue-500 text-white px-2 py-2 ml-4 focus:outline-none poppins rounded-full" type="submit">Update</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            
+            <!-- Link for chef to update status to 'success' -->
+            
+        </tbody>
+    </table>
+</div>
+{% endblock %}

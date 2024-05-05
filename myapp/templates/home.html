@@ -1,0 +1,80 @@
+ {% extends 'base.html' %} 
+ {% load static %} 
+ {% block main %}
+ 
+ {% include 'nav.html' %}
+ <div class="mb-2">
+    {% include 'message.html' %}
+ </div>
+ 
+ <style>
+    .food_bg {
+        height: 40%;
+        width: 45%;
+
+
+    }
+ </style>
+
+<div class="backlogo bg-gray-700 flex flex-col items-center justify-center h-96   m-10 mr-10  px-3 py-5  ">
+    <div>
+        <h1 class="drak:text-white text-white font-bold">Restaurand Pi Dong Ns</h1>
+    </div>
+    
+    <!--<img class="food_bg ml-[40%]" src="{% static 'img/food_image_02.jpg' %}" > -->
+</div>
+
+<section class="my-12 max-w-screen-xl mx-auto px-6"></section>
+<div class="flex items-center justify-center space-x-6">
+    <a href="/" class="active_menu_tab poppins transition transform duration-700 hover:shadow-xl hover:scale-105 hover:text-red-500 p-4 rounded-lg relative">Shop in Food</a>
+
+</div>
+{% include 'nav2.html' %}
+
+<form method="POST" action="#" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="grid grid-rows-2 grid-flow-col gap-2">
+
+        {% for food in foods %}
+        <div class="bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl hover:scale-105 p-4 rounded-lg relative">
+            <a href="#" class="bg-red-100 border border-red-500 rounded-full text-primary text-sm poppins px-4 py-1 inline-block mb-4 ">Breakfast</a>
+            {% if food.image %}
+            <img class="w-64 mx-auto transform transition duration-300 hover:scale-105" src="{{ food.image.url }}" alt="image">
+            {% else %}
+            <p>No image available</p>
+            {% endif %}
+            <div class="flex flex-col items-center my-3 space-y-2">
+                <h1 class="text-gray-900 poppins text-lg">{{ food.title }}</h1>
+                <p class="text-gray-500 poppins text-sm text-center"></p>
+                <p>
+                    {% for i in "12345" %}
+                    {% if p.popularity >= forloop.counter %}
+                    🌟
+                    {% endif %}
+                    {% endfor %}
+                </p>
+                
+                <h2 class="text-gray-900 poppins text-2xl font-bold">{{ food.price }} Bath</h2>
+                <a href="/add_to_cart/{{ food.id }}" class="bg-red-500 text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105">Add</a>
+            </div>
+            
+        </div>
+
+        {% endfor %}
+
+    </div>
+</form>
+
+
+
+<div class=" justify-between w-full">
+    {% include 'footer.html' %}
+</div>
+
+
+{% endblock %}
+
+<!-- JavaScript -->
+
+
+

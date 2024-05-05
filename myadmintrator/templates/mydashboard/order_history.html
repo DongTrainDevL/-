@@ -1,0 +1,23 @@
+<!-- templates/history_order.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Order</title>
+</head>
+<body>
+    <h1>History Order</h1>
+    <div>
+        {% for order_history in order_history_list %}
+            <div>
+                <p>Order ID: {{ order_history.order.id }}</p>
+                <p>Date Ordered: {{ order_history.order.date_ordered }}</p>
+                <p>Status: {{ order_history.order.status }}</p>
+                <!-- เพิ่มข้อมูลอื่น ๆ ตามต้องการ -->
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>last order</title>
+{% endblock %}
+
+
+{% block main %}
+
+<h1>Latest Order Details</h1>
+    {% if latest_order %}
+        <p><strong>Order ID:</strong> {{ latest_order.id }}</p>
+        <p><strong>Date Ordered:</strong> {{ latest_order.date_ordered }}</p>
+        <!-- Add more details as needed -->
+    {% else %}
+        <p>No orders found for the current user.</p>
+    {% endif %}
+    <h3 class="text-center bg-red-300">order list </h3>
+
+    {% for item in order_items %}
+                <li>{{ item.title }} - Price: {{ item.price }} - Quantity: {{ item.quantity }}</li>
+    {% endfor %}
+
+  
+{% endblock %}

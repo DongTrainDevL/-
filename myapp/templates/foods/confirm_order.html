@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Payment</title>
+{% endblock %}
+
+
+
+{% block main %}
+
+
+<h1>Confilm</h1>
+
+<div class="ml-[40%] mt-2">
+    <img class="pay" src="{% static 'img/payment/pay1.png' %}" alt="user photo">
+</div>
+
+
+
+
+    <h1>Order Confirmation</h1>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% elif error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    <form action="{% url 'confirm_order' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Order</button>
+    </form>
+
+
+
+<!-- 
+<form method="post">
+  {% csrf_token %}
+  <h1>Your want to confilmOrder </h1>
+  <button class="bg-red-300 rounded-lg px-4 py-2 w-1/12" type="submit">Yes</button>
+  <a class="bg-blue-300 rounded-lg px-4 py-2 w-1/12" href="{% url 'payment' %}">No</a>
+  
+</form>
+
+ -->
+
+{% endblock %}
+
+
+

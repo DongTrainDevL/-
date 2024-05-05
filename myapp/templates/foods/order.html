@@ -1,0 +1,53 @@
+
+{% extends 'base.html' %}
+
+{% block title %} <title>cart</title> {% endblock  %}
+  
+
+
+{% block main %}
+<div class="container mx-auto mt-10">
+    <div class="flex shadow-md my-10">
+      <div class="w-3/4 bg-white px-10 py-10">
+        <div class="flex justify-between border-b pb-8">
+          <h1 class="font-semibold text-2xl">Foods Cart</h1>
+          <h2 class="font-semibold text-2xl"> id = 3</h2>
+        </div>
+        <div class="flex mt-10 mb-5">
+          <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Quantity</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Price</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Num</h3>
+        </div>
+
+        <!-- {% for f in foods %} -->
+        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+          <div class="flex w-2/5"> <!-- product -->
+            <div class="w-20">
+              <img class="h-24" src="{{ f.image.url }}" alt="image">
+            </div>
+            <div class="flex flex-col justify-between ml-4 flex-grow">
+              <span class="font-bold text-sm">{{ f.title }}</span>
+              <span class="text-red-500 text-xs">#e</span>
+              <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+            </div>
+          </div>
+          <div class="flex justify-center w-1/5">
+            <input class="mx-2 border text-center w-20" type="number" name="quantity" value="0">
+          </div>
+          <span class="text-center w-1/5 font-semibold text-sm">{{ f.price }}</span>
+          <span class="text-center w-1/5 font-semibold text-sm">totol price</span>
+
+          <div>
+            <a href="#" type="submit" class="bg-red-500 text-white  font-semibold text-sm px-2 py-3 h-12 w-15 focus:outline-none poppins rounded-full mt-5 transform transition duration-300 hover:scale-105">OrderNow </a>
+          </div>
+        </div>
+
+        <!-- {% endfor %} -->
+       
+      </div>
+    </div>
+  </div>
+{% endblock %}
+  

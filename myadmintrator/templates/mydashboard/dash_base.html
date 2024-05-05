@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}My Admin{% endblock %}</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.main.css">
+
+    <style>
+      .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left : 0;
+        z-index: 100;
+        padding: 90px 0 0 ;
+        box-shadow: inset-1px 0 0 rgb(0,0,0,01);
+      }
+
+      @media (max-width : 768px) {
+        .sidebar {
+          top:11.5rem;
+          padding:0;
+        }
+      }
+      .navbar {
+        box-shadow: inset 0 -1px 0 0 rgb(0,0,0,0.1);
+      }
+      @media (min-width: 768px){
+        .navbar {
+          top:0 ;
+          position: sticky ;
+          z-index: 999
+        }
+      }
+    </style>
+
+
+
+
+  </head>
+  <body>
+
+    {% include 'message.html' %}
+    
+    <!--side bar logo -->
+    {% block content %} {% endblock %}
+    <nav class="navbar navbar-light bg-light">
+      <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+        <a href="#" class="navbar-brand">My Admin</a>
+      </div>
+          <button class="navbar-toggler d-md-none colloapsed mb-3 "type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-exapnded="false" aria-label="Toggle">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="col-12 col-md-4 col-lg-2">
+        <input type="text" class="form-control form-control-dark" placeholder="Search" aria-label="Search">
+      </div>
+     
+      <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+        <div class="mr-3 mt-1">
+          <!-- Place this tag where you want the button to render. -->
+          <a class="github-button" href="https://github.com/Themesberg/simple-bootstrap-5-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star Themesberg/simple-bootstrap-5-dashboard on GitHub">Star</a>
+        <!-- Place this tag in your head or just before your close body tag. -->
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"
+            >{{user.username}}</button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <li><a href="#" class="dropdown-item">Setting</a></li>
+               <li><a href="#" class="dropdown-item">Message</a></li>
+               <li><a href="/admin-myadmintrator/logoutadmin" class="dropdown-item">sigout</a></li>
+            </ul>
+          </div>
+        <div>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container-fluid">
+    <div class="row">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky">
+              <ul class="nav flex-column">
+                  <li class="nav-item">
+                      <a href="#" class="nav-link active" aria-current="page">
+                        <i data-feather="home"></i>
+                        <span class="ml-2">Dashboard</span>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/admin-myadmintrator/Order/" class="nav-link " aria-current="page">
+                      <i data-feather="file"></i>
+                      <span class="ml-2">History</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="/admin-myadmintrator/product/" class="nav-link " aria-current="page">
+                    <i data-feather="shopping-cart"></i>
+                    <span class="ml-2">Products</span>
+                  </a>
+              </li>
+
+              
+
+              <li class="nav-item">
+                <a href="/admin-myadmintrator/member/" class="nav-link " aria-current="page">
+                  <i data-feather="users"></i>
+                  <span class="ml-2">Members</span>
+                </a>
+            </li>
+
+            
+
+            <li class="nav-item">
+              <a href="#" class="nav-link " aria-current="page">
+                <i data-feather="bar-chart-2"></i>
+                <span class="ml-2">report</span>
+              </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="btn btn-sm btn-warning ml-3 mt-3" aria-current="page">
+              <i data-feather="book-open"></i>
+              <span class="ml-2">view page</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'plotgrap' %}" class="btn btn-sm btn-primary ml-3 mt-3" aria-current="page">
+            <i data-feather="bar-chart"></i>
+            <span class="ml-2">chart</span>
+          </a>
+      </li>
+              </ul>
+            </div>
+        </nav>
+        
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Overviews<a></a></li>
+            </ol>
+          </nav>
+
+          <h1 class="h2">Dashboard</h1>
+          <p>
+            This is home page myadmin 
+          </p>
+
+          <div class="row my-4">
+            <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                <div class="card ">
+                    <h5 class="card-header">customer</h5>
+                    <div class="card-body">
+                      <h5 class="card-title">354k</h5>
+                      <p class="card-text">23 Feb 2023</p>
+                      <p class="crad-text text-success">19.2% increase sice last mount</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+              <div class="card ">
+                  <h5 class="card-header">Revenue<i class="mdi mdi-bell-remove-outline:"></i></h5>
+                  <div class="card-body">
+                    <h5 class="card-title">354k</h5>
+                    <p class="card-text">23 Feb 2023</p>
+                    <p class="crad-text text-success">19.2% increase sice last mount</p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <div class="card ">
+                <h5 class="card-header">Purchases</h5>
+                <div class="card-body">
+                  <h5 class="card-title">354k</h5>
+                  <p class="card-text">23 Feb 2023</p>
+                  <p class="crad-text text-success">19.2% increase sice last mount</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+          <div class="card ">
+              <h5 class="card-header">traffic</h5>
+              <div class="card-body">
+                <h5 class="card-title">354k</h5>
+                <p class="card-text">23 Feb 2023</p>
+                <p class="crad-text text-success">19.2% increase sice last mount</p>
+              </div>
+          </div>
+      </div>
+    </div>
+
+        <div class="row">
+          <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+             <div class="card">
+                <h5 class="card-header">Latest transection</h5>
+                <div class="card-body">
+                    <div class="table-responsive">
+                       <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delate</th>
+                            <th scope="col">data</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for b in members %}
+                          <tr>
+                            <th>
+                              <div class="w-16 h-16">
+                                <img class=""
+                                    src="{{b.image.url}}"
+                                    alt="" />
+                            </div>
+                            </th>
+                            <th class="row ml-2">{{b.first_name}}</th>
+                            <td>{{b.username}}</td>
+                            <td>{{b.email}}</td>
+                        
+                            <td>stay logged in (User)</td>
+                            <td><a href="{% url 'admin-myadmintrator:edit_member' id=b.id  %}" class="btn btn-sm btn-primary">Edit</a>
+                            {% if user.is_staff %}
+                            <td><a href="{% url 'admin-myadmintrator:delete' b.id %}" class="btn btn-sm btn-danger">Delate</a></td>
+                            {% endif %}
+                            <td><a href="#" class="btn btn-sm btn-primary">Views</a></td>
+                            
+                            
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                       </table>
+                    </div>
+                </div>
+             </div>
+          </div>
+
+          <div class="col-12 col-xl-4">
+            <div class="card">
+              <h5 class="card-header">Traffic last 6 mount</h5>
+              <div class="card-body">
+                  <div id="traffic-chart"></div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          
+
+        </div>
+
+        <footer class="pt-5 d-flex justify-content-between">
+          <span>Copyright &copy; 2020-2030<a href="google.com"></a></span>
+          <ul class="nav m-0">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-secondary" aria-current="page">Privacy Policy</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link text-secondary" aria-current="page">Term and condition</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link text-secondary" aria-current="page">contract</a>
+            </li>
+          </ul>
+        </footer>
+        </main>
+    </div>
+  </div>
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.main.js"></script>
+    <script>
+      feather.replace()
+
+      new Chartist.Line('#traffic-chart', {
+        labels: ['January', 'Februrary' ,'March','April','May','June'],
+        Series: [
+          [23000, 25000, 26000, 30000,40000,50000]
+        ]
+      }, {
+        low:0,
+        showArea:true
+      });
+    </script>
+
+    <script>
+    var ctx = document.getElementById('trafficChart').getContext('2d');
+    var trafficChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Traffic',
+                data: [23000, 25000, 26000, 30000, 40000, 50000],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+
+
+  </body>
+</html>
